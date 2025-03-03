@@ -42,10 +42,11 @@ export default function Login() {
     try {
       if (role === 'admin') {
         await login('admin@example.com', 'password');
+        toast.success('Logged in as Admin');
       } else {
         await login('member@example.com', 'password');
+        toast.success('Logged in as Member');
       }
-      toast.success('Logged in successfully');
       navigate('/dashboard');
     } catch (error) {
       toast.error('Failed to login with demo account');
