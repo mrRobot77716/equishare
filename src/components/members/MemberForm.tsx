@@ -1,6 +1,7 @@
 
 import { useState } from 'react';
 import { useFinance } from '@/contexts/FinanceContext';
+import { useAuth } from '@/contexts/AuthContext';
 import { ActionButton } from '@/components/ui/ActionButton';
 import { X } from 'lucide-react';
 import { toast } from 'sonner';
@@ -17,9 +18,17 @@ interface MemberFormProps {
 
 export function MemberForm({ onClose, existingMember }: MemberFormProps) {
   const { addMember, updateMember, members } = useFinance();
+  const { isAdmin } = useAuth();
   const [name, setName] = useState(existingMember?.name || '');
   const [email, setEmail] = useState(existingMember?.email || '');
   const [percentage, setPercentage] = useState(existingMember?.percentage.toString() || '');
+
+  // Redirect non-admin users if they somehow access this component
+  if (!isAdmin) {
+    toast.error("You don't have permission to manage members");
+    onClose();
+    return null;
+  }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
