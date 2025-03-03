@@ -5,7 +5,7 @@ import { useFinance } from '@/contexts/FinanceContext';
 import { useAuth } from '@/contexts/AuthContext';
 import { ActionButton } from '@/components/ui/ActionButton';
 import { MemberForm } from '@/components/members/MemberForm';
-import { Edit, Plus, Trash2, Users } from 'lucide-react';
+import { Edit, Plus, Trash2, Users, Percent } from 'lucide-react';
 import { toast } from 'sonner';
 
 export default function Members() {
